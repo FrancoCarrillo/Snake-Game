@@ -1,2 +1,5 @@
 # Snake Game
-## Andree y  Franco Carrillo
+#
+# Desarrolladores:
+## - Andree  Carrillo
+## - Franco Carrillo
