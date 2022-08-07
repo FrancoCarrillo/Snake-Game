@@ -1,9 +1,14 @@
+const points_title = document.getElementById('points_title');
+
 const GROUND_SIZE = 500
 const BODY_SIZE = 10;
 const GROW_SIZE = 10;
 const BOARD_WIDTH = GROUND_SIZE/BODY_SIZE
 const BOARD_HEIGHT = GROUND_SIZE/BODY_SIZE
 const PLAY_VELOCITY = 80
+
+let game_points = 0;
+
 
 const game_state = {
     'canvas': null,
@@ -53,6 +58,7 @@ function snake_move() {
     if(addBody){
         game_state.grow += GROW_SIZE;
         game_state.apple = randomPosition();
+        points_title.innerHTML = `Points: ${++game_points}`
     }
 
 
