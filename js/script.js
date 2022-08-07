@@ -1,12 +1,17 @@
-const BODY_SIZE = 20;
-const GROW_SIZE = 2;
+const GROUND_SIZE = 500
+const BODY_SIZE = 10;
+const GROW_SIZE = 10;
+const BOARD_WIDTH = GROUND_SIZE/BODY_SIZE
+const BOARD_HEIGHT = GROUND_SIZE/BODY_SIZE
+const PLAY_VELOCITY = 80
 
 const game_state = {
     'canvas': null,
     'context': null,
-    'snake': [{x:0, y:0}],
+    'snake': [{x: parseInt(Math.random() * BOARD_WIDTH), y: parseInt(Math.random() * BOARD_HEIGHT)}],
     'direction': {x:1, y:0},
-    'grow': false
+    'apple': {x: parseInt(Math.random() * BOARD_WIDTH), y: parseInt(Math.random() * BOARD_HEIGHT)},
+    'grow': 0
 }
 
 const KEY_DIRECTION = {
@@ -16,6 +21,9 @@ const KEY_DIRECTION = {
     "ArrowRight" : [1,0],
 }
 
+function randomPosition(){
+    return {x: parseInt(Math.random() * BOARD_WIDTH), y: parseInt(Math.random() * BOARD_HEIGHT)}
+}
 
 function snake_move() {
         
@@ -23,6 +31,8 @@ function snake_move() {
     let tail = {};
 
     Object.assign(tail, game_state.snake[tailIndex])
+
+    let addBody = ( game_state.snake[0].x === game_state.apple.x && game_state.snake[0].y === game_state.apple.y);
 
     for(let i= tailIndex; i>-1; i--){
 
@@ -36,19 +46,45 @@ function snake_move() {
 
     }
 
+    if(isCollision()){
+        location.reload()
+    }
+    
+    if(addBody){
+        game_state.grow += GROW_SIZE;
+        game_state.apple = randomPosition();
+    }
+
+
+
     if(game_state.grow > 0){
         game_state.snake.push(tail);
         game_state.grow -= GROW_SIZE
     }
 
     requestAnimationFrame(draw_snake)
-    setTimeout(snake_move, 1000)
+    setTimeout(snake_move, PLAY_VELOCITY)
+}
+
+function isCollision(){
+    
+    const head = game_state.snake[0];
+    
+    if(head.x < 0 || head.x >= BOARD_WIDTH|| head.y < 0|| head.y >= BOARD_HEIGHT) return true;
+
+    
+    for (let i = 1 ; i < game_state.snake.length; i++){
+        if((game_state.snake[i].x === head.x) && (game_state.snake[i].y === head.y)) return true
+    }
+
+    return false
 }
 
 
 function draw_pixel(color, x, y) {
     game_state.context.fillStyle = color;
     game_state.context.fillRect(x * BODY_SIZE , y*BODY_SIZE, BODY_SIZE, BODY_SIZE);
+
 }
 
 function draw_snake(){
@@ -59,6 +95,9 @@ function draw_snake(){
         const {x,y} = game_state.snake[i]
         draw_pixel('#453', x, y);
     }
+
+    const {x, y} = game_state.apple;
+    draw_pixel('red', x, y);
 }
 
 window.onload = ()=>{
@@ -70,18 +109,12 @@ window.onload = ()=>{
         const direction = KEY_DIRECTION[e.key]
 
         if(direction){
-            
             const [x, y] = direction
-
             if(game_state.direction.x !== -x && game_state.direction.y !== -y) {
                 game_state.direction.x = x;
                 game_state.direction.y = y;
             }
             
-        }
-
-        if(e.key === 'w'){
-            game_state.grow += GROW_SIZE;
         }
 
     }
