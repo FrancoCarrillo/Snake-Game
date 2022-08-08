@@ -5,7 +5,7 @@ const BODY_SIZE = 10;
 const GROW_SIZE = 10;
 const BOARD_WIDTH = GROUND_SIZE/BODY_SIZE
 const BOARD_HEIGHT = GROUND_SIZE/BODY_SIZE
-const PLAY_VELOCITY = 80
+const PLAY_VELOCITY = 30
 
 let game_points = 0;
 
