@@ -1,5 +1,26 @@
+body {
+  margin: 0;
+}
+
+#points_title {
+  margin: 0;
+  position: absolute;
+}
+
 #canvas {
-  border: 2px solid black;
+  background: url("https://opengameart.org/sites/default/files/grass_template2.jpg");
+  background-size: 100%;
+  box-shadow: 0px 0px 10px 8px #453;
+}
+
+#container {
+  background: url("https://www.animaker.com/blog/wp-content/uploads/2018/06/Animaker-Lion-Chasing.gif");
+  background-size: 100%;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=index.css.map */
