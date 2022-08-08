@@ -5,13 +5,14 @@ body
 #points_title
 {
     font-family: 'Mouse Memoirs', sans-serif;
-    font-size: 35px;
+    font-size: 30px;
     text-shadow: 3px 3px 4px black, 0 0 10px black;
     letter-spacing: 10px;    
     margin: 17px;
     color: orangered;
 }
 #canvas{
+    margin-top: 120px;
     background:url("https://opengameart.org/sites/default/files/grass_template2.jpg");
     background-size: 100%;
     //border: 5px solid black;
@@ -29,7 +30,7 @@ body
 #title
 {
     font-family: 'Mouse Memoirs', sans-serif;
-    font-size: 100px;
+    font-size: 50px;
     text-shadow: 6px 6px 4px black, 0 0 10px black;
     letter-spacing: 30px;    
     word-spacing: 50;
@@ -38,7 +39,7 @@ body
 }
 #contenedor
 {
-    padding-top: 30px;
+    padding-top: 15px;
     width: 100%;
     display: flex;
     flex-direction: column;
